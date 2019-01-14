@@ -32,10 +32,40 @@
 	  product_price INT NOT NULL, product_desc TEXT NOT NULL,
     product_image TEXT NOT NULL);";
   query_table($db_link, "products", $create_table_products);
+  
   $create_table_categories = "CREATE TABLE categories
     (cat_id INT PRIMARY KEY NOT NULL,
     cat_title TEXT NOT NULL);";
   query_table($db_link, "categories", $create_table_categories);
+
+  $create_table_customers = "CREATE TABLE customers
+  	(customer_id INT(10) PRIMARY KEY AUTO_INCREMENT NOT NULL,
+	customer_name TEXT DEFAULT 'item' NOT NULL,
+	  customer_email VARCHAR(100) DEFAULT 'item' NOT NULL,
+	customer_pass VARCHAR(100) DEFAULT 'item' NOT NULL,
+	  customer_address TEXT NOT NULL);";
+  query_table($db_link, "customers", $create_table_customers);
+
+  $create_table_admins = "CREATE TABLE `admins`
+  	(`user_id` INT(10) PRIMARY KEY AUTO_INCREMENT NOT NULL,
+	  `user_email` VARCHAR(255) DEFAULT 'item' NOT NULL,
+	`user_pass` VARCHAR(255) DEFAULT 'item' NOT NULL);";
+  query_table($db_link, "admins", $create_table_admins);
+
+  $create_table_cart = "CREATE TABLE cart
+  	(p_id INT(10) PRIMARY KEY AUTO_INCREMENT NOT NULL,
+	  ip_add VARCHAR(255) DEFAULT 'item' NOT NULL,
+	  qty INT DEFAULT 'item' NOT NULL);";
+  query_table($db_link, "cart", $create_table_cart);
+
+  $create_table_order = "CREATE TABLE order
+  (`order_id` int(100) PRIMARY KEY AUTO_INCREMENT NOT NULL,
+  `p_id` int(100) NOT NULL,
+  `c_id` int(100) NOT NULL,
+  `qty` int(100) NOT NULL,
+  `order_date` date NOT NULL);";
+query_table($db_link, "order", $create_table_order);
+
   $insert_products = "INSERT INTO products (product_cat,
     product_title, product_price, product_desc, product_image) VALUES
     (0, 'Supreme Water Bottle', 50, 'A red water bottle with Supreme logo.',
